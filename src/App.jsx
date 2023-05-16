@@ -16,10 +16,10 @@ function App() {
       },
     ],
   });
-  const search = (term) => {
+  const search = async (term) => {
     console.log(term);
     setSearchTerm(term);
-    setResult(getTranslation(term));
+    getTranslation(term).then((result) => setResult(result));
   };
 
   return (

@@ -6,10 +6,16 @@ const salt = "234623784";
 const getTranslation = async (query = "apple", from = "en", to = "zh") => {
   const stringOne = APPID + query + salt + KEY;
   const sign = MD5(stringOne);
-  const fetchURL = `http://api.fanyi.baidu.com/api/trans/vip/translate?q=${query}&from=${from}&to=${to}&appid=${APPID}&salt=${salt}&sign=${sign}`;
-
-  const response = await fetch(fetchURL);
-  const result = response.json();
+  const fetchURL = `https://api.fanyi.baidu.com/api/trans/vip/translate?q=${query}&from=${from}&to=${to}&appid=${APPID}&salt=${salt}&sign=${sign}`;
+  console.log(fetchURL);
+  const result = await fetch(fetchURL)
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   return result;
 };
 

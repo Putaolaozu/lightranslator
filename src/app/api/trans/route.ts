@@ -1,14 +1,12 @@
 import axios from "axios";
 import { MD5 } from "@/util/md5";
 import { getURLQuery } from "@/util/GetURLQuery";
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const appID = process.env.APP_ID;
 const key = process.env.KEY;
 const salt = 13213789743;
 const baidu = "https://fanyi-api.baidu.com/api/trans/vip/translate";
-let translation = "";
 
 function getFetchURL(query: string) {
   const sign = MD5(appID + query + salt + key);
@@ -31,7 +29,7 @@ async function translate(data: string) {
     });
   return result;
 }
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (req: NextRequest, res: NextResponse) => {
   const url = req.url;
   if (url) {
     const query = getURLQuery(url, "q");

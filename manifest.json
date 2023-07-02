@@ -1,0 +1,45 @@
+{
+  "name": "光翻译",
+  "short_name": "光翻",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "natural",
+  "theme_color": "#5eace0",
+  "icons": [
+    {
+      "src": "/translate-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/translate-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/translate-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/translate-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/translate-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/translate-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/translate-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

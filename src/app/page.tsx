@@ -6,11 +6,11 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [translation, setTranslation] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetch(`/api/trans?q=${search}`)
       .then((response) => {

@@ -4,7 +4,8 @@
   "start_url": "/",
   "display": "standalone",
   "orientation": "natural",
-  "theme_color": "#5eace0",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "/translate-32.png",

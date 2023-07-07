@@ -42,7 +42,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center gap-5 p-24">
         <hgroup className="flex flex-col justify-center items-center gap-2">
           <h1 className="text-2xl font-bold">光是翻译就够了</h1>
-          <p className="text-slate-400">(自动中英互译)</p>
+          <p className="text-slate-400">(自动中译英，其他译中)</p>
         </hgroup>
         <form onSubmit={handleSubmit} className="flex gap-2 flex-col">
           <textarea

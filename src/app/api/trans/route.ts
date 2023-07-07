@@ -15,9 +15,9 @@ function getFetchURL(query: string, to: string) {
 
 async function translate(data: string) {
   if (data == "" || typeof data !== "string") return;
-  let isEn = /^[a-zA-Z\s,.]+$/.test(data);
+  let isZh = /[\u3400-\u9fa5]/.test(data);
 
-  const url = getFetchURL(data, isEn ? "zh" : "en");
+  const url = getFetchURL(data, isZh ? "en" : "zh");
   const result = await axios
     .get(url)
     .then((response) => {

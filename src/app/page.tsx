@@ -49,13 +49,13 @@ export default function Home() {
           rows={5}
           name="query"
           placeholder="Type in to translate.."
-          className="text-slate-200 dark:bg-slate-800 rounded p-2 outline-none border-none placeholder:text-sm"
+          className="dark:text-slate-200 dark:bg-slate-800 rounded p-2 outline-none border-none placeholder:text-sm"
           value={search}
           onChange={handleChange}
         />
         <button
           type="submit"
-          className="border-slate-200 text-slate-700 dark:text-slate-300 font-bold border-spacing-1 border-2 rounded bg-blue-400 dark:bg-blue-800 p-2 hover:bg-blue-500">
+          className="dark:border-slate-600 border-slate-800 text-slate-700 dark:text-slate-300 border-spacing-1 border-2 rounded bg-blue-400 dark:bg-blue-800 p-2 hover:bg-blue-500">
           {isSubmitting ? "Translating..." : "Translate"}
         </button>
       </form>
@@ -74,7 +74,7 @@ export default function Home() {
             alt={copied ? "already copied" : "copy translation"}></Image>
         </button>
         <p className="dark:text-slate-500 text-slate-300">Translation:</p>
-        <p className="text-slate-100">{translation}</p>
+        <p className="dark:text-slate-200">{translation}</p>
       </section>
     </main>
   );

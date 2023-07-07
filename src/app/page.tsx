@@ -65,7 +65,7 @@ export default function Home() {
               alt="clear input"
               width={22}
               height={22}
-              className="absolute top-2 right-2 cursor-pointer dark:invert dark:opacity-60"
+              className="absolute top-2 right-2 cursor-pointer dark:invert opacity-60"
               onClick={clearSearch}
             />
           )}
@@ -83,12 +83,12 @@ export default function Home() {
               title="copy"
               onClick={handleCopy}
               className={`copy_btn absolute top-2 right-2 ${
-                copied ? "copied" : "hover:bg-gray-500 transition-all cursor-pointer"
+                copied ? "copied" : "dark:hover:bg-slate-800 hover:bg-slate-200 transition-all cursor-pointer"
               }`}>
               <Image
                 src={copied ? "/assets/tick.svg" : "/assets/copy.svg"}
-                width={12}
-                height={12}
+                width={18}
+                height={18}
                 alt={copied ? "already copied" : "copy translation"}></Image>
             </button>
             <p className="dark:text-slate-500 text-slate-500">意思是:</p>

@@ -22,7 +22,7 @@
 
 如图：
 
-![Safari添加到主屏幕](/add_to_home.jpeg)
+<img src='./add_to_home.jpeg' alt='Safari add to home page' width='300px'/>
 
 ### Android 等其他操作系统与浏览器
 

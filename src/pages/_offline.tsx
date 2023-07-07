@@ -61,30 +61,11 @@ export default function Home() {
             {isSubmitting ? "正在翻译..." : "翻译"}
           </button>
         </form>
-        {translation === "" || (
-          <section className="dark:bg-slate-900 rounded p-2 w-[300px] flex flex-col relative">
-            <button
-              type="button"
-              title="copy"
-              onClick={handleCopy}
-              className={`copy_btn absolute top-2 right-2 ${
-                copied ? "copied" : "hover:bg-gray-500 transition-all cursor-pointer"
-              }`}>
-              <Image
-                src={copied ? "/assets/tick.svg" : "/assets/copy.svg"}
-                width={12}
-                height={12}
-                alt={copied ? "already copied" : "copy translation"}></Image>
-            </button>
-            <p className="dark:text-slate-500 text-slate-500">下面是结果:</p>
-            <p className="dark:text-slate-200">{translation}</p>
-          </section>
-        )}
       </main>
-      <footer className="absolute bottom-2 w-full">
-        <p className="text-center italic text-sm opacity-40">
-          By @
-          <Link href="https://github.com/Putaolaozu/light-translater.git" className="underline">
+      <footer className="absolute bottom-4 w-full">
+        <p className="text-center italic text-sm font-thin opacity-40">
+          By&nbsp;
+          <Link href="https://github.com/Putaolaozu/light-translater.git" className="underline font-light">
             Putaolaozu
           </Link>
         </p>

@@ -73,7 +73,7 @@ export default function Home() {
             height={12}
             alt={copied ? "already copied" : "copy translation"}></Image>
         </button>
-        <p className="dark:text-slate-500">Translation:</p>
+        <p className="dark:text-slate-500 text-slate-300">Translation:</p>
         <p className="text-slate-100">{translation}</p>
       </section>
     </main>

@@ -55,7 +55,7 @@ export default function Home() {
         />
         <button
           type="submit"
-          className="border-slate-200 border-spacing-1 border-2 rounded bg-blue-600 p-2 hover:bg-blue-500">
+          className="border-slate-200 text-slate-100 dark:text-slate-300 font-bold border-spacing-1 border-2 rounded bg-blue-600 dark:bg-blue-800 p-2 hover:bg-blue-500">
           {isSubmitting ? "Translating..." : "Translate"}
         </button>
       </form>

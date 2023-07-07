@@ -12,8 +12,6 @@
 
 > 强烈建议自行部署，自己申请一个 API（免费），这样不会担心 API 翻译额度用完。部署方式见第三部分。
 
----
-
 本人的项目部署在 Netlify 上，地址是[guangyi.netlify.app](https://guangyi.netlify.app)，这是一个[PWA](https://zh.wikipedia.org/zh-cn/%E6%B8%90%E8%BF%9B%E5%BC%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F)(渐进式网络应用)，因此强烈建议将其*添加到主屏幕*使用。
 
 ### Safari（iOS 11 以上）

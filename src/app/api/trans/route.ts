@@ -8,17 +8,16 @@ const key = process.env.KEY;
 const salt = 13213789743;
 const baidu = "https://fanyi-api.baidu.com/api/trans/vip/translate";
 
-function getFetchURL(query: string) {
+function getFetchURL(query: string, to: string) {
   const sign = MD5(appID + query + salt + key);
-  return `${baidu}?q=${query}&from=en&to=zh&appid=${appID}&salt=${salt}&sign=${sign}`;
+  return `${baidu}?q=${query}&from=auto&to=${to}&appid=${appID}&salt=${salt}&sign=${sign}`;
 }
 
 async function translate(data: string) {
-  "use server";
-  const query = data;
-  if (query == "" || typeof query !== "string") return;
+  if (data == "" || typeof data !== "string") return;
+  let isEn = /^[a-zA-Z\s,.]+$/.test(data);
 
-  const url = getFetchURL(query);
+  const url = getFetchURL(data, isEn ? "zh" : "en");
   const result = await axios
     .get(url)
     .then((response) => {

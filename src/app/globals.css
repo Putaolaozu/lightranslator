@@ -18,10 +18,14 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.copy_btn {
+  @apply w-7 h-7 rounded-full bg-gray-900 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center;
+}
+
+.copied::after {
+  content: "Copied!";
+  @apply absolute top-full text-xs bg-slate-600 text-slate-50 p-1 rounded opacity-80;
 }

@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-
 import { useState } from "react";
 
 export default function Home() {
@@ -50,7 +49,7 @@ export default function Home() {
           rows={5}
           name="query"
           placeholder="Type in to translate.."
-          className="text-slate-200 bg-slate-800 rounded p-2 outline-none border-none placeholder:text-sm"
+          className="text-slate-200 dark:bg-slate-800 rounded p-2 outline-none border-none placeholder:text-sm"
           value={search}
           onChange={handleChange}
         />
@@ -60,7 +59,7 @@ export default function Home() {
           {isSubmitting ? "Translating..." : "Translate"}
         </button>
       </form>
-      <section className="bg-slate-900 rounded p-2 w-[300px] flex flex-col relative">
+      <section className="dark:bg-slate-900 rounded p-2 w-[300px] flex flex-col relative">
         <button
           type="button"
           title="copy"
@@ -74,7 +73,7 @@ export default function Home() {
             height={12}
             alt={copied ? "already copied" : "copy translation"}></Image>
         </button>
-        <p className="text-slate-500">Translation:</p>
+        <p className="dark:text-slate-500">Translation:</p>
         <p className="text-slate-100">{translation}</p>
       </section>
     </main>

@@ -22,7 +22,7 @@ body {
 }
 
 .copy_btn {
-  @apply w-7 h-7 rounded-full bg-gray-900 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center;
+  @apply w-7 h-7 rounded-full dark:bg-gray-900 bg-slate-100 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center;
 }
 
 .copied::after {

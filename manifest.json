@@ -8,37 +8,37 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "/translate-32.png",
+      "src": "/app-icons/translate-32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/translate-72.png",
+      "src": "/app-icons/translate-72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "/translate-128.png",
+      "src": "/app-icons/translate-128.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "/translate-144.png",
+      "src": "/app-icons/translate-144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "/translate-192.png",
+      "src": "/app-icons/translate-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/translate-256.png",
+      "src": "/app-icons/translate-256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "/translate-512.png",
+      "src": "/app-icons/translate-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

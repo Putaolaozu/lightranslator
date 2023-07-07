@@ -15,7 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content="光翻" />
-        <link rel="apple-touch-icon" href="/translate-256.png"></link>
+        <meta name="theme-color" content="#317EFB" />
+        <link rel="apple-touch-icon" href="/app-icons/translate-256.png"></link>
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={inter.className}>{children}</body>

@@ -23,10 +23,13 @@ export default function Home() {
       .then((response) => {
         setTranslation(response);
         setisSubmitting(false);
-        setSearch("");
       })
 
       .catch((error) => console.log(error));
+  };
+
+  const clearSearch = () => {
+    setSearch("");
   };
 
   const handleCopy = () => {
@@ -44,7 +47,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold">光是翻译就够了</h1>
           <p className="text-slate-400">(自动中译英，其他译中)</p>
         </hgroup>
-        <form onSubmit={handleSubmit} className="flex gap-2 flex-col">
+        <form onSubmit={handleSubmit} className="relative flex gap-2 flex-col">
           <textarea
             id="query"
             cols={30}
@@ -55,6 +58,18 @@ export default function Home() {
             value={search}
             onChange={handleChange}
           />
+
+          {search === "" || (
+            <Image
+              src="/assets/close.svg"
+              alt="clear input"
+              width={22}
+              height={22}
+              className="absolute top-2 right-2 cursor-pointer dark:invert dark:opacity-60"
+              onClick={clearSearch}
+            />
+          )}
+
           <button
             type="submit"
             className="dark:border-slate-600 border-slate-800 text-slate-100 dark:text-slate-300 border-spacing-1 border-2 rounded bg-blue-500 dark:bg-blue-800 p-2 hover:bg-blue-500">

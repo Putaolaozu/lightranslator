@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Home() {
   const [search, setSearch] = useState("");
   const [translation, setTranslation] = useState("");
   const [isSubmitting, setisSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSearch(e.target.value);
@@ -30,6 +31,7 @@ export default function Home() {
 
   const clearSearch = () => {
     setSearch("");
+    textareaRef?.current?.focus();
   };
 
   const handleCopy = () => {
@@ -57,6 +59,7 @@ export default function Home() {
             className="dark:text-slate-200 dark:bg-slate-800 rounded p-2 outline-none border-none placeholder:text-sm"
             value={search}
             onChange={handleChange}
+            ref={textareaRef}
           />
 
           {search === "" || (
@@ -72,7 +75,7 @@ export default function Home() {
 
           <button
             type="submit"
-            className="dark:border-slate-600 border-slate-800 text-slate-100 dark:text-slate-300 border-spacing-1 border-2 rounded bg-blue-500 dark:bg-blue-800 p-2 hover:bg-blue-500">
+            className="dark:border-slate-600 text-slate-100 dark:text-slate-300 border-spacing-1 dark:border-2 rounded bg-blue-500 dark:bg-blue-800 p-2 hover:bg-blue-400 transition-all">
             {isSubmitting ? "正在翻译..." : "翻译"}
           </button>
         </form>

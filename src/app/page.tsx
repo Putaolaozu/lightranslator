@@ -101,12 +101,11 @@ export default function Home() {
       </main>
       <footer className="absolute bottom-4 w-full">
         <p className="text-center italic text-sm font-thin opacity-40">
-          By&nbsp;
+          By
+          <Image src="/assets/github-mark.png" alt="github mark" width={20} height={20} className="inline-block mx-1" />
           <Link href="https://github.com/Putaolaozu/light-translater.git" className="underline font-light">
             Putaolaozu
           </Link>
-          &nbsp;
-          <Image src="/assets/github-mark.png" alt="github mark" width={20} height={20} className="inline-block" />
         </p>
       </footer>
     </>

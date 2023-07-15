@@ -105,6 +105,8 @@ export default function Home() {
           <Link href="https://github.com/Putaolaozu/light-translater.git" className="underline font-light">
             Putaolaozu
           </Link>
+          &nbsp;
+          <Image src="/assets/github-mark.png" alt="github mark" width={20} height={20} className="inline-block" />
         </p>
       </footer>
     </>

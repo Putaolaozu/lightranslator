@@ -1,4 +1,4 @@
-import { getURLQuery } from "@/util/getURLQuery";
+import { getURLQuery } from "@/util/GetURLQuery";
 import { NextRequest, NextResponse } from "next/server";
 import { BaiduTranslate } from "@/util/BaiduTranslate";
 import { queryInfo } from "@/util/queryInfo";

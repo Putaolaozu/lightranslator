@@ -1,11 +1,43 @@
 "use client";
+import Vocabulary from "@/components/Vocabulary";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [translation, setTranslation] = useState("");
+  const [translationResults, setTranslationResults] = useState({
+    BaiduResult: "",
+    wordTranslation: [
+      {
+        word: "",
+        phonetic: "",
+        phonetics: [
+          {
+            text: "",
+            audio: "",
+          },
+        ],
+        origin: "",
+        meanings: [
+          {
+            partOfSpeech: "",
+            definitions: [
+              {
+                definition: "",
+                synonyms: [],
+                antonyms: [],
+              },
+            ],
+            synonyms: [],
+            antonyms: [],
+          },
+        ],
+        license: { name: "", url: "" },
+        sourceUrls: [""],
+      },
+    ],
+  });
   const [isSubmitting, setisSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -21,8 +53,8 @@ export default function Home() {
       .then((response) => {
         return response.json();
       })
-      .then((response) => {
-        setTranslation(response);
+      .then((result) => {
+        setTranslationResults(result);
         setisSubmitting(false);
       })
 
@@ -36,7 +68,7 @@ export default function Home() {
 
   const handleCopy = () => {
     setCopied(true);
-    navigator.clipboard.writeText(translation);
+    navigator.clipboard.writeText(translationResults.BaiduResult);
     setTimeout(() => {
       setCopied(false);
     }, 3000);
@@ -44,19 +76,17 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-center gap-5 p-24">
+      <main className="flex min-h-screen flex-col items-center justify-center gap-5">
         <hgroup className="flex flex-col justify-center items-center gap-2">
-          <h1 className="text-2xl font-bold">光是翻译就够了</h1>
-          <p className="text-slate-400">(自动中译英，其他译中)</p>
+          <h1 className="text-2xl lg:text-3xl font-bold mt-4">纯粹是翻译</h1>
+          <p className="text-slate-400">(中译英，其他译中，单个单词显示词典)</p>
         </hgroup>
-        <form onSubmit={handleSubmit} className="relative flex gap-2 flex-col">
+        <form onSubmit={handleSubmit} className="relative flex gap-2 flex-col w-[96vw] max-w-[1024px] m-4">
           <textarea
             id="query"
-            cols={30}
-            rows={5}
             name="query"
             placeholder="输入你想翻译的.."
-            className="dark:text-slate-200 dark:bg-slate-800 rounded p-2 outline-none border-none placeholder:text-sm"
+            className="dark:text-slate-200 sm:text-lg lg:text-xl w-full h-28 sm:h-[256px] md:h-[480px] lg:h-[600px] dark:bg-slate-800 rounded p-2 md:p-6 outline-none border-none placeholder:text-sm sm:placeholder:text-lg"
             value={search}
             onChange={handleChange}
             ref={textareaRef}
@@ -68,8 +98,9 @@ export default function Home() {
               alt="clear input"
               width={22}
               height={22}
-              className="absolute top-2 right-2 cursor-pointer dark:invert opacity-60"
+              className="absolute bottom-16 right-2 sm:right-6 cursor-pointer dark:invert opacity-60 hover:opacity-100"
               onClick={clearSearch}
+              title="clear all"
             />
           )}
 
@@ -79,8 +110,8 @@ export default function Home() {
             {isSubmitting ? "正在翻译..." : "翻译"}
           </button>
         </form>
-        {translation === "" || (
-          <section className="dark:bg-slate-900 rounded p-2 w-[300px] flex flex-col relative">
+        {translationResults.BaiduResult === "" || (
+          <section className="dark:bg-slate-900 bg-slate-50 rounded p-2 sm:p-6 w-[96vw] max-w-[1024px] flex flex-col relative sm:text-lg">
             <button
               type="button"
               title="copy"
@@ -94,14 +125,16 @@ export default function Home() {
                 height={18}
                 alt={copied ? "already copied" : "copy translation"}></Image>
             </button>
-            <p className="dark:text-slate-500 text-slate-500">意思是:</p>
-            <p className="dark:text-slate-200 text-center">{translation}</p>
+            <p className="text-slate-500 mb-2">译文:</p>
+            <p className="dark:text-slate-200 text-center">{translationResults.BaiduResult}</p>
           </section>
         )}
+        {translationResults.wordTranslation[0] === null || (
+          <Vocabulary Vocabulary={translationResults.wordTranslation} />
+        )}
       </main>
-      <footer className="absolute bottom-4 w-full">
+      <footer className="w-full mt-4 mb-2">
         <p className="text-center italic text-sm font-thin opacity-40">
-          By
           <Image src="/assets/github-mark.png" alt="github mark" width={20} height={20} className="inline-block mx-1" />
           <Link href="https://github.com/Putaolaozu/light-translater.git" className="underline font-light">
             Putaolaozu

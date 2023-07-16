@@ -76,12 +76,12 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-center gap-5">
+      <main className="flex min-h-[93vh] flex-col items-center justify-center gap-5">
         <hgroup className="flex flex-col justify-center items-center gap-2">
           <h1 className="text-2xl lg:text-3xl font-bold mt-4">纯粹是翻译</h1>
           <p className="text-slate-400">(中译英，其他译中，单个单词显示词典)</p>
         </hgroup>
-        <form onSubmit={handleSubmit} className="relative flex gap-2 flex-col w-[96vw] max-w-[1024px] m-4">
+        <form onSubmit={handleSubmit} className="relative flex gap-2 flex-col w-[92vw] max-w-[1024px] m-4">
           <textarea
             id="query"
             name="query"

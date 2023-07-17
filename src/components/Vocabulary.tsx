@@ -21,7 +21,7 @@ const Vocabulary = ({ Vocabulary }: { Vocabulary: VocabularyProps }) => {
                     <audio
                       controls
                       src={phonetic.audio}
-                      className="h-8 w-64 dark:opacity-90 border-2 rounded-full dark:border-none"></audio>
+                      className="h-8 w-36 md:w-64 dark:opacity-90 border-2 rounded-full dark:border-none"></audio>
                   )}
                 </li>
               );

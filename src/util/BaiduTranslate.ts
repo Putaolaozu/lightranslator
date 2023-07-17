@@ -17,7 +17,7 @@ async function BaiduTranslate(query: string) {
   let { isZh } = queryInfo(query);
 
   const Baiduurl = getFetchURL(query, isZh ? "en" : "zh");
-  const Baiduresult = await axios
+  const BaiduResult = await axios
     .get(Baiduurl)
     .then((response) => {
       return response.data.trans_result[0].dst;
@@ -25,7 +25,8 @@ async function BaiduTranslate(query: string) {
     .catch((error) => {
       console.log(error);
     });
-  return Baiduresult;
+
+  return BaiduResult;
 }
 
 export { BaiduTranslate };

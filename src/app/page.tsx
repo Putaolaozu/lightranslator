@@ -129,7 +129,9 @@ export default function Home() {
             <p className="dark:text-slate-200 text-center">{translationResults.BaiduResult}</p>
           </section>
         )}
-        {translationResults.wordTranslation[0] && <Vocabulary Vocabulary={translationResults.wordTranslation} />}
+        {translationResults?.wordTranslation?.length > 0 && (
+          <Vocabulary Vocabulary={translationResults.wordTranslation} />
+        )}
       </main>
       <footer className="w-full mt-4 mb-2">
         <p className="text-center italic text-sm font-thin opacity-40">

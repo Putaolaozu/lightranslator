@@ -11,9 +11,9 @@ const Vocabulary = ({ Vocabulary }: { Vocabulary: VocabularyProps }) => {
 
           {/* Phonetic of the vocabulary */}
           <ul className="list-disc my-3 p-2">
-            {phonetics.map((phonetic) => {
+            {phonetics.map((phonetic, index) => {
               return (
-                <li className="flex justify-start items-center gap-4">
+                <li className="flex justify-start items-center gap-4" key={index}>
                   <em className="tracking-wide text-lg font-bold dark:text-stone-400 text-stone-800">
                     {phonetic.text}
                   </em>
@@ -29,14 +29,14 @@ const Vocabulary = ({ Vocabulary }: { Vocabulary: VocabularyProps }) => {
           </ul>
 
           {/* Meaning of the word */}
-          {meanings.map((meaning) => {
+          {meanings.map((meaning, index) => {
             return (
-              <div className="my-4">
+              <div className="my-4" key={index}>
                 <h3 className="dark:text-blue-400 text-blue-900 italic">{meaning.partOfSpeech}</h3>
                 <ol className="list-decimal px-8">
-                  {meaning.definitions.map((definition) => {
+                  {meaning.definitions.map((definition, index) => {
                     return (
-                      <li className="my-2 p-2 sm:text-lg">
+                      <li className="my-2 p-2 sm:text-lg" key={index}>
                         <p className="font-sans">{definition.definition}</p>
                         {definition.synonyms[0] && (
                           <p className="mt-2">

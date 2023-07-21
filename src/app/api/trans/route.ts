@@ -11,9 +11,11 @@ export const GET = async (req: NextRequest) => {
   const { word } = queryInfo(query);
   let wordTranslation = null;
   if (word) {
-    wordTranslation = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`).then((response) =>
-      response.json()
-    );
+    wordTranslation = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+      .then((response) => response.json())
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const result = { wordTranslation, BaiduResult };

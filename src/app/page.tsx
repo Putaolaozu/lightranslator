@@ -86,7 +86,7 @@ export default function Home() {
             id="query"
             name="query"
             placeholder="输入你想翻译的.."
-            className="dark:text-slate-200 sm:text-lg lg:text-xl w-full h-28 sm:h-[256px] md:h-[480px] lg:h-[600px] dark:bg-slate-800 rounded p-2 md:p-6 outline-none border-none placeholder:text-sm sm:placeholder:text-lg"
+            className="dark:text-slate-200 sm:text-lg lg:text-xl w-full h-28 sm:h-[256px] md:h-[380px] lg:h-[500px] dark:bg-slate-800 rounded p-2 md:p-6 outline-none border-none placeholder:text-sm sm:placeholder:text-lg"
             value={search}
             onChange={handleChange}
             ref={textareaRef}
@@ -129,7 +129,7 @@ export default function Home() {
             <p className="dark:text-slate-200 text-center">{translationResults.BaiduResult}</p>
           </section>
         )}
-        {translationResults.wordTranslation === null || <Vocabulary Vocabulary={translationResults.wordTranslation} />}
+        {translationResults.wordTranslation[0] && <Vocabulary Vocabulary={translationResults.wordTranslation} />}
       </main>
       <footer className="w-full mt-4 mb-2">
         <p className="text-center italic text-sm font-thin opacity-40">

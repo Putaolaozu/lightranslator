@@ -5,16 +5,23 @@ import { queryInfo } from "@/util/queryInfo";
 
 export const GET = async (req: NextRequest) => {
   const query = getURLQuery(req.url, "q");
+  const mode = getURLQuery(req.url, "mode");
 
-  const BaiduResult = await BaiduTranslate(query);
+  let BaiduResult = null;
+  if (mode !== "word") {
+    BaiduResult = await BaiduTranslate(query);
+  }
 
   const { word } = queryInfo(query);
   let wordTranslation = null;
   if (word) {
     wordTranslation = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json();
+      })
       .catch((error) => {
         console.log(error);
+        return { title: `Error: ${error.message}` };
       });
   }
 

@@ -1,18 +1,25 @@
+# Lightranslator-光翻译
+
 ## 这是啥？
 
-本应用除了直接翻译以外没有任何其他功能（词义、句式等）。
+> 鉴于现在国内的翻译 app 已经丧心病狂，甚至能在里面刷短视频、买理财产品（wtf？），想做一个够简洁的翻译 web app。
 
-为保持简洁，不设置语言选项，会自动将中文翻译成英文，其他语言翻译成中文。
+这是一个基于[Next.JS](https://nextjs.org)的超简洁翻译 web 应用，只有段落翻译和单词释义，操作简便。
 
-鉴于现在国内的翻译 app 已经丧心病狂，甚至能在里面刷短视频、买理财产品（wtf？），想做一个够简洁的翻译 web app。
+### 功能
 
-这是一个基于[Next.JS](https://nextjs.org)和[百度翻译 API](https://https://fanyi-api.baidu.com)的超简洁翻译 web 应用。
+1. 段落翻译：点击翻译按钮，自动将其他语言译成简体中文，中文译成英语
+2. 单词释义：点击输入框或翻译结果中的任意单词，查看详细的英语释义
+
+### 使用演示
+
+![demo](./demo.gif)
 
 ## 使用方式
 
-> 强烈建议自行部署，自己申请一个 API（免费），这样不会担心 API 翻译额度用完。部署方式见第三部分。
+### 桌面端
 
-本人的项目部署在 Netlify 上，地址是[guangyi.netlify.app](https://guangyi.netlify.app)，这是一个[PWA](https://zh.wikipedia.org/zh-cn/%E6%B8%90%E8%BF%9B%E5%BC%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F)(渐进式网络应用)，因此强烈建议将其*添加到主屏幕*使用。
+用浏览器打开 https://guangyi.netlify.app 或 https://guangyi.ptlz.me（我自己的域名）
 
 ### Safari（iOS 11 以上）
 
@@ -28,12 +35,10 @@
 
 示例：[Firefox 演示视频](https://youtu.be/heSvwQgEMLM)
 
-## 部署
-
-> 以[Netlify](https://netlify.com)为例，全程免费。
+## 自行部署
 
 到[fanyi-api.baidu.com](https://fanyi-api.baidu.com)注册一个百度翻译开发者账号，申请一个通用文本翻译 API，然后查看自己的开发者信息，记下**APP ID**和**密钥**。
 
-注册一个 GitHub 账号，将本项目复制到自己的 repository 里，然后用 GitHub 登录[Netlify](https://netlify.com)，选择*Add new site*>_Import an existing project_，选择你自己的那个 repository，其他选项默认即可。记住有一个**Add environment variables**的选项，*Key*分别设置为`APP_ID`和`KEY`，对应的*Value*则是你自己开发者账号的*APP ID*和*密钥*。
+部署的时候，对于**environment variables（环境变量）**，*Key*分别设置为`APP_ID`和`KEY`，对应的*Value*则是你自己开发者账号的*APP ID*和*密钥*。
 
-### 祝玩得开心！
+祝玩得开心！

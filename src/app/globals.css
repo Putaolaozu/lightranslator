@@ -21,11 +21,27 @@ body {
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
-.copy_btn {
-  @apply w-7 h-7 rounded-full dark:bg-slate-900 bg-slate-100 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center;
+.textarea {
+  @apply dark:text-slate-200 sm:text-lg lg:text-xl w-full h-10 sm:h-28 rounded p-2 md:p-6 outline-none border-none placeholder:text-sm sm:placeholder:text-lg resize-none;
+}
+
+.translate-button {
+  @apply dark:border-slate-600 text-slate-100 dark:text-slate-300 border-spacing-1 dark:border-2 rounded bg-blue-500 dark:bg-blue-800 p-2 active:scale-95 transition-all;
+}
+
+.clear-btn {
+  @apply absolute bottom-3 sm:bottom-5 right-2 sm:right-6 cursor-pointer dark:invert opacity-60 hover:opacity-100 hover:scale-105 active:scale-95 z-20;
+}
+
+.copy-btn {
+  @apply absolute top-2 right-2 w-7 h-7 rounded-full dark:bg-slate-900 bg-slate-100 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center;
 }
 
 .copied::after {
   content: "Copied!";
   @apply absolute top-full text-xs bg-slate-600 text-slate-50 p-1 rounded opacity-80;
+}
+
+.word-btn:hover {
+  @apply bg-yellow-300 text-black transition-all rounded;
 }

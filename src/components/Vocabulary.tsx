@@ -2,26 +2,31 @@ import { VocabularyProps } from "@/util/types";
 import React from "react";
 
 const Vocabulary = ({ Vocabulary }: { Vocabulary: VocabularyProps }) => {
+  if (typeof Vocabulary === "string") {
+    return <p>{Vocabulary}</p>;
+  }
+
   const { word, phonetics, meanings } = Vocabulary[0];
   return (
     <>
       {word && (
-        <section className="w-[96vw] max-w-[1024px] m-4">
-          <h2 className="sm:text-2xl text-xl font-bold font-mono m-2">{word}</h2>
+        <section className="max-w-[1024px] m-4 z-50">
+          <h2 className="sm:text-2xl text-xl font-bold font-mono my-4">{word}</h2>
 
           {/* Phonetic of the vocabulary */}
+          <h3 className="dark:text-indigo-400 text-indigo-900 italic">phonetic</h3>
           <ul className="list-disc my-3 p-2">
             {phonetics.map((phonetic, index) => {
               return (
-                <li className="flex justify-start items-center gap-4" key={index}>
-                  <em className="tracking-wide text-lg font-bold dark:text-stone-400 text-stone-800">
+                <li className="grid grid-cols-3 gap-4 my-2 sm:my-4 w-fit" key={index}>
+                  <em className="tracking-wide text-sm sm:text-base lg:text-lg font-bold dark:text-stone-400 text-stone-800">
                     {phonetic.text}
                   </em>
                   {phonetic.audio && phonetic.text && (
                     <audio
                       controls
                       src={phonetic.audio}
-                      className="h-8 w-36 md:w-64 dark:opacity-90 sm:border-2 rounded-full dark:border-none"></audio>
+                      className="h-6 w-20 sm:w-32 lg:w-64 dark:opacity-90 sm:border-2 rounded-full dark:border-none"></audio>
                   )}
                 </li>
               );
@@ -36,7 +41,7 @@ const Vocabulary = ({ Vocabulary }: { Vocabulary: VocabularyProps }) => {
                 <ol className="list-decimal px-8">
                   {meaning.definitions.map((definition, index) => {
                     return (
-                      <li className="my-2 p-2 sm:text-lg" key={index}>
+                      <li className="sm:my-2 p-2 sm:text-lg" key={index}>
                         <p className="font-sans">{definition.definition}</p>
                         {definition.synonyms[0] && (
                           <p className="mt-2">

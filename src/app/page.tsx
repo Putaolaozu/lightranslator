@@ -1,64 +1,86 @@
 "use client";
+import PopupBtn from "@/components/ManualBtn";
+import TextAreaText from "@/components/InputText";
 import Vocabulary from "@/components/Vocabulary";
+import { TranslationProps } from "@/util/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import InputText from "@/components/InputText";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [translationResults, setTranslationResults] = useState({
-    BaiduResult: "",
-    wordTranslation: [
-      {
-        word: "",
-        phonetic: "",
-        phonetics: [
-          {
-            text: "",
-            audio: "",
-          },
-        ],
-        origin: "",
-        meanings: [
-          {
-            partOfSpeech: "",
-            definitions: [
-              {
-                definition: "",
-                synonyms: [],
-                antonyms: [],
-              },
-            ],
-            synonyms: [],
-            antonyms: [],
-          },
-        ],
-        license: { name: "", url: "" },
-        sourceUrls: [""],
-      },
-    ],
-  });
+  const [translationResults, setTranslationResults] = useState<TranslationProps>();
   const [isSubmitting, setisSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [storageCleared, setStorageCleared] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaWrapper = useRef<HTMLDivElement>(null);
 
+  // automatically resize the textarea
+  const resizeTextarea = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      let scrollHeight = textareaRef.current.scrollHeight;
+      textareaRef.current.style.height = `${scrollHeight}px`;
+
+      const textareaHeight = textareaRef?.current?.style?.height as string;
+      if (textareaWrapper.current) {
+        textareaWrapper.current.style.height = textareaHeight;
+      }
+    }
+  };
+  useEffect(() => {
+    textareaRef.current?.addEventListener("input", resizeTextarea);
+    textareaRef.current?.addEventListener("click", resizeTextarea);
+
+    return () => {
+      textareaRef.current?.removeEventListener("input", resizeTextarea);
+      textareaRef.current?.removeEventListener("click", resizeTextarea);
+    };
+  }, []);
+
+  // handle searching event
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSearch(e.target.value);
   };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setisSubmitting(true);
-    fetch(`/api/trans?q=${search}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        setTranslationResults(result);
-        setisSubmitting(false);
-      })
+    if (search) {
+      setisSubmitting(true);
 
-      .catch((error) => console.log(error));
+      //if user has searched before, get the resule from localstorage
+      const preSearchResult = localStorage.getItem(search);
+      if (preSearchResult) {
+        setTranslationResults(JSON.parse(preSearchResult));
+        setisSubmitting(false);
+      }
+      // if not, fetch the result
+      else {
+        fetch(`/api/trans?q=${search}`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((result) => {
+            if (result.wordTranslation?.title) {
+              setTranslationResults({ ...result, wordTranslation: result.wordTranslation.title });
+            } else if (!result.BaiduResult) {
+              setTranslationResults(result);
+            } else {
+              localStorage.setItem(search, JSON.stringify(result));
+              setTranslationResults(result);
+            }
+
+            setisSubmitting(false);
+          })
+
+          .catch((error) => {
+            console.log(error);
+            alert(error);
+            setisSubmitting(false);
+          });
+      }
+    }
   };
 
   const clearSearch = () => {
@@ -68,55 +90,69 @@ export default function Home() {
 
   const handleCopy = () => {
     setCopied(true);
-    navigator.clipboard.writeText(translationResults.BaiduResult);
+    navigator.clipboard.writeText(translationResults?.BaiduResult || "");
     setTimeout(() => {
       setCopied(false);
     }, 3000);
   };
 
+  const clearStorage = () => {
+    setStorageCleared(true);
+    localStorage.clear();
+    setTimeout(() => {
+      setStorageCleared(false);
+    }, 2000);
+  };
+
   return (
     <>
-      <main className="flex min-h-[93vh] flex-col items-center justify-center gap-5">
-        <hgroup className="flex flex-col justify-center items-center gap-2">
-          <h1 className="text-2xl lg:text-3xl font-bold mt-4">纯粹是翻译</h1>
-          <p className="text-slate-400">(中译英，其他译中，单个单词显示词典)</p>
+      <main className="flex min-h-[92vh] flex-col items-center justify-center gap-5">
+        <hgroup className="flex flex-col justify-center items-center gap-2 w-full mt-12 mb-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold lg:font-extrabold font-mono italic tracking-tight">
+            Ligh<span className="text-red-500">t</span>ranslator
+          </h1>
+          <PopupBtn />
         </hgroup>
-        <form onSubmit={handleSubmit} className="relative flex gap-2 flex-col w-[92vw] max-w-[1024px] m-4">
-          <textarea
-            id="query"
-            name="query"
-            placeholder="输入你想翻译的.."
-            className="dark:text-slate-200 sm:text-lg lg:text-xl w-full h-28 sm:h-[256px] md:h-[380px] lg:h-[500px] dark:bg-slate-800 rounded p-2 md:p-6 outline-none border-none placeholder:text-sm sm:placeholder:text-lg"
-            value={search}
-            onChange={handleChange}
-            ref={textareaRef}
-          />
-
-          {search === "" || (
-            <Image
-              src="/assets/close.svg"
-              alt="clear input"
-              width={22}
-              height={22}
-              className="absolute bottom-16 right-2 sm:right-6 cursor-pointer dark:invert opacity-60 hover:opacity-100"
-              onClick={clearSearch}
-              title="clear all"
+        <form onSubmit={handleSubmit} className="flex gap-2 flex-col w-[92vw] max-w-[1024px] m-4">
+          <div
+            ref={textareaWrapper}
+            className={`relative h-10 sm:h-28 p-2 md:p-6 box-border ${isSubmitting && "blur-[1px]"}`}>
+            <TextAreaText text={search} textColor="[rgba(0,0,0,0)]" />
+            <textarea
+              id="query"
+              name="query"
+              placeholder="输入你想翻译的.."
+              className={`textarea dark:bg-slate-800 absolute top-0 left-0 z-10`}
+              value={search}
+              onChange={handleChange}
+              ref={textareaRef}
+              disabled={isSubmitting}
             />
-          )}
 
-          <button
-            type="submit"
-            className="dark:border-slate-600 text-slate-100 dark:text-slate-300 border-spacing-1 dark:border-2 rounded bg-blue-500 dark:bg-blue-800 p-2 hover:bg-blue-400 transition-all">
-            {isSubmitting ? "正在翻译..." : "翻译"}
+            {search === "" || (
+              <Image
+                src="/assets/close.svg"
+                alt="clear input"
+                width={22}
+                height={22}
+                className="clear-btn"
+                onClick={clearSearch}
+                title="clear all"
+              />
+            )}
+          </div>
+
+          <button type="submit" className="translate-button">
+            {isSubmitting ? "稍等..." : "翻译"}
           </button>
         </form>
-        {translationResults.BaiduResult === "" || (
-          <section className="dark:bg-slate-900 bg-slate-50 rounded p-2 sm:p-6 w-[96vw] max-w-[1024px] flex flex-col relative sm:text-lg">
+        {translationResults?.BaiduResult && (
+          <section className="dark:bg-slate-900 bg-slate-50 rounded p-2 my-4 sm:p-6 w-[92vw] max-w-[1024px] flex flex-col relative sm:text-lg">
             <button
               type="button"
               title="copy"
               onClick={handleCopy}
-              className={`copy_btn absolute top-2 right-2 ${
+              className={`copy-btn ${
                 copied ? "copied" : "dark:hover:bg-slate-800 hover:bg-slate-200 transition-all cursor-pointer"
               }`}>
               <Image
@@ -126,19 +162,44 @@ export default function Home() {
                 alt={copied ? "already copied" : "copy translation"}></Image>
             </button>
             <p className="text-slate-500 mb-2">译文:</p>
-            <p className="dark:text-slate-200 text-center">{translationResults.BaiduResult}</p>
+            <p className="dark:text-slate-200 text-left">
+              <InputText text={translationResults.BaiduResult} textColor="inherit" />
+            </p>
           </section>
         )}
-        {translationResults?.wordTranslation?.length > 0 && (
-          <Vocabulary Vocabulary={translationResults.wordTranslation} />
+        {translationResults?.wordTranslation && (
+          <div className="w-[92vw] max-w-[1024px]">
+            <Vocabulary Vocabulary={translationResults.wordTranslation} />
+          </div>
         )}
       </main>
-      <footer className="w-full mt-4 mb-2">
+      <footer className="w-full mt-4 mb-2 flex justify-center items-center gap-4 min-h-[6vh]">
         <p className="text-center italic text-sm font-thin opacity-40">
           <Image src="/assets/github-mark.png" alt="github mark" width={20} height={20} className="inline-block mx-1" />
           <Link href="https://github.com/Putaolaozu/light-translater.git" className="underline font-light">
-            Putaolaozu
+            Github
           </Link>
+        </p>
+        <p className="text-center italic text-sm font-thin opacity-40">
+          {storageCleared ? (
+            <svg
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+              width="14"
+              height="14"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              className="dark:stroke-slate-200 stroke-slate-900">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+          ) : (
+            <button type="button" className="underline font-light" onClick={clearStorage}>
+              清除缓存
+            </button>
+          )}
         </p>
       </footer>
     </>

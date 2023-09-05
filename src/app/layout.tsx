@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Lightranslate-光翻译",
+  title: "Lightranslator-光翻译",
   description: "A pure translator application，一个简洁，纯粹的翻译应用",
 };
 

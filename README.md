@@ -19,7 +19,7 @@
 
 ### 桌面端
 
-用浏览器打开 https://guangyi.netlify.app 或 https://guangyi.ptlz.me（我自己的域名）
+用浏览器打开 https://lightrans.netlify.app 或 https://lightrans.ptlz.me（我自己的域名）
 
 ### Safari（iOS 11 以上）
 

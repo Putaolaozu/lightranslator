@@ -1,6 +1,6 @@
 {
-  "name": "光翻译",
-  "short_name": "光译",
+  "name": "lightranslator-光翻译",
+  "short_name": "lightrans",
   "start_url": "/",
   "display": "standalone",
   "orientation": "natural",

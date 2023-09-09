@@ -5,8 +5,9 @@ import Vocabulary from "@/components/Vocabulary";
 import { TranslationProps } from "@/util/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import InputText from "@/components/InputText";
+import { useResize } from "@/hooks/useResize";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -14,31 +15,7 @@ export default function Home() {
   const [isSubmitting, setisSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
   const [storageCleared, setStorageCleared] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const textareaWrapper = useRef<HTMLDivElement>(null);
-
-  // automatically resize the textarea
-  const resizeTextarea = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-      let scrollHeight = textareaRef.current.scrollHeight;
-      textareaRef.current.style.height = `${scrollHeight}px`;
-
-      const textareaHeight = textareaRef?.current?.style?.height as string;
-      if (textareaWrapper.current) {
-        textareaWrapper.current.style.height = textareaHeight;
-      }
-    }
-  };
-  useEffect(() => {
-    textareaRef.current?.addEventListener("input", resizeTextarea);
-    textareaRef.current?.addEventListener("click", resizeTextarea);
-
-    return () => {
-      textareaRef.current?.removeEventListener("input", resizeTextarea);
-      textareaRef.current?.removeEventListener("click", resizeTextarea);
-    };
-  }, []);
+  const [textareaRef, textareaWrapperRef] = useResize(); // automatically resize the textarea
 
   // handle searching event
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -115,7 +92,7 @@ export default function Home() {
         </hgroup>
         <form onSubmit={handleSubmit} className="flex gap-2 flex-col w-[92vw] max-w-[1024px] m-4">
           <div
-            ref={textareaWrapper}
+            ref={textareaWrapperRef as React.LegacyRef<HTMLDivElement>}
             className={`relative h-10 sm:h-28 p-2 md:p-6 box-border ${isSubmitting && "blur-[1px]"}`}>
             <TextAreaText text={search} textColor="[rgba(0,0,0,0)]" />
             <textarea
@@ -125,7 +102,7 @@ export default function Home() {
               className={`textarea dark:bg-slate-800 absolute top-0 left-0 z-10`}
               value={search}
               onChange={handleChange}
-              ref={textareaRef}
+              ref={textareaRef as React.LegacyRef<HTMLTextAreaElement>}
               disabled={isSubmitting}
             />
 

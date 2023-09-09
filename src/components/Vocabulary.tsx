@@ -1,4 +1,4 @@
-import { VocabularyProps } from "@/util/types";
+import { VocabularyProps } from "@/types/VocabularyProps";
 import React from "react";
 
 const Vocabulary = ({ Vocabulary }: { Vocabulary: VocabularyProps }) => {

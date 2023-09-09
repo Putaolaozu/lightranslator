@@ -12,10 +12,7 @@ const Word = ({ word, textColor }: { word: string; textColor: string }) => {
     <>
       <span className="relative inline-block z-20">
         {/[A-Za-z\-]/.test(word) ? (
-          <button
-            type="button"
-            className={`word-btn sm:text-lg lg:text-xl text-${textColor} active:scale-95`}
-            onClick={getDefinition}>
+          <button type="button" className={`word-btn text-${textColor}`} onClick={getDefinition}>
             {word}
           </button>
         ) : word === " " ? (

@@ -33,9 +33,8 @@ module.exports = {
           "100%": { opacity: "0" },
         },
         dropDown: {
-          "0%": { transform: "scaleY(0) translateY(-30%)", opacity: "0" },
-          "50%": { transform: "scaleY(1) translateY(0%)", opacity: "0.7" },
-          "70%": { transform: "scaleY(1.1) translateY(0%)", opacity: "0.8" },
+          "0%": { transform: "scaleY(0) translateY(-100%)", opacity: "0" },
+          "50%": { transform: "scaleY(0.7) translateY(-50%)", opacity: "0.3" },
           "100%": { transform: "scaleY(1) translateY(0%)", opacity: "1" },
         },
         pullUp: {
@@ -48,7 +47,7 @@ module.exports = {
         squize: "0.4s ease-in-out 1 squize",
         squizeOut: "0.4s ease-in-out 1 squizeOut",
         fadeIn: "0.7s ease-in 1 fadeIn",
-        fadeOut: "0.8s ease-in 1 reverse fadeIn forward",
+        fadeOut: "0.8s ease-in 1 reverse fadeIn",
         dropDown: "0.4s ease-in-out 1 dropDown",
         pullUp: "0.4s ease-in-out 1 pullUp",
       },

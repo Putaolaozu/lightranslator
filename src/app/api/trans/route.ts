@@ -1,6 +1,6 @@
-import { getURLQuery } from "@/util/GetURLQuery";
+import { getURLQuery } from "@/util/getURLQuery";
 import { NextRequest, NextResponse } from "next/server";
-import { BaiduTranslate } from "@/util/BaiduTranslate";
+import { BaiduTranslate } from "@/util/baiduTranslate";
 import { queryInfo } from "@/util/queryInfo";
 
 export const GET = async (req: NextRequest) => {

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Vocabulary from "./Vocabulary";
 import Image from "next/image";
-import { TranslationProps } from "@/util/types";
+import { TranslationProps } from "@/types/TranslationProps";
 
 const WordDefPage = ({ word, setOpenWin }: { word: string; setOpenWin: (value: boolean) => void }) => {
   const [translationResults, setTranslationResults] = useState<TranslationProps>();

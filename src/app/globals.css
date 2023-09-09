@@ -42,6 +42,6 @@ body {
   @apply absolute top-full text-xs bg-slate-600 text-slate-50 p-1 rounded opacity-80;
 }
 
-.word-btn:hover {
-  @apply bg-yellow-300 text-black transition-all rounded;
+.word-btn {
+  @apply sm:text-lg lg:text-xl active:scale-95 hover:bg-yellow-300 hover:text-black transition-all rounded;
 }

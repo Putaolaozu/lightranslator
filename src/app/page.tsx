@@ -2,7 +2,7 @@
 import PopupBtn from "@/components/ManualBtn";
 import TextAreaText from "@/components/InputText";
 import Vocabulary from "@/components/Vocabulary";
-import { TranslationProps } from "@/util/types";
+import { TranslationProps } from "@/types/TranslationProps";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,7 +12,7 @@ import { useResize } from "@/hooks/useResize";
 export default function Home() {
   const [search, setSearch] = useState("");
   const [translationResults, setTranslationResults] = useState<TranslationProps>();
-  const [isSubmitting, setisSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
   const [storageCleared, setStorageCleared] = useState(false);
   const [textareaRef, textareaWrapperRef] = useResize(); // automatically resize the textarea
@@ -21,16 +21,17 @@ export default function Home() {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSearch(e.target.value);
   };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (search) {
-      setisSubmitting(true);
+      setIsSubmitting(true);
 
       //if user has searched before, get the resule from localstorage
       const preSearchResult = localStorage.getItem(search);
       if (preSearchResult) {
         setTranslationResults(JSON.parse(preSearchResult));
-        setisSubmitting(false);
+        setIsSubmitting(false);
       }
       // if not, fetch the result
       else {
@@ -48,13 +49,13 @@ export default function Home() {
               setTranslationResults(result);
             }
 
-            setisSubmitting(false);
+            setIsSubmitting(false);
           })
 
           .catch((error) => {
             console.log(error);
             alert(error);
-            setisSubmitting(false);
+            setIsSubmitting(false);
           });
       }
     }

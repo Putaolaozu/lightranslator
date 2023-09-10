@@ -1,6 +1,6 @@
 import { getURLQuery } from "@/util/getURLQuery";
 import { NextRequest, NextResponse } from "next/server";
-import { BaiduTranslate } from "@/util/baiduTranslate";
+import { baiduTranslate } from "@/util/baiduTranslate";
 import { queryInfo } from "@/util/queryInfo";
 
 export const GET = async (req: NextRequest) => {
@@ -9,7 +9,7 @@ export const GET = async (req: NextRequest) => {
 
   let BaiduResult = null;
   if (mode !== "word") {
-    BaiduResult = await BaiduTranslate(query);
+    BaiduResult = await baiduTranslate(query);
   }
 
   const { word } = queryInfo(query);

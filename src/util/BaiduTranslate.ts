@@ -12,7 +12,7 @@ function getFetchURL(query: string, to: string) {
   return `${baidu}?q=${query}&from=auto&to=${to}&appid=${appID}&salt=${salt}&sign=${sign}`;
 }
 
-async function BaiduTranslate(query: string) {
+async function baiduTranslate(query: string) {
   if (query == "") return "";
   let { isZh } = queryInfo(query);
 
@@ -29,4 +29,4 @@ async function BaiduTranslate(query: string) {
   return BaiduResult;
 }
 
-export { BaiduTranslate };
+export { baiduTranslate };

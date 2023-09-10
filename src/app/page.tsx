@@ -89,7 +89,7 @@ export default function Home() {
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold lg:font-extrabold font-mono italic tracking-tight">
             Ligh<span className="text-red-500">t</span>ranslator
           </h1>
-          <PopupBtn />
+          <PopupBtn />x
         </hgroup>
         <form onSubmit={handleSubmit} className="flex gap-2 flex-col w-[92vw] max-w-[1024px] m-4">
           <div
